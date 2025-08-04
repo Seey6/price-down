@@ -1,14 +1,24 @@
 {
   "name": "long-bao-exchange",
-  "private": true,
+  "private": false,
   "version": "1.0.0",
   "description": "我要换素龙！ - 汪苏泷粉丝专属周边交换平台",
   "type": "module",
+  "homepage": "https://username.github.io/price-down",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/price-down.git"
+  },
+  "keywords": ["汪苏泷", "周边交换", "价值评估", "粉丝", "react", "vite"],
+  "author": "Your Name",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

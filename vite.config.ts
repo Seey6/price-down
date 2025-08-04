@@ -11,4 +11,15 @@ export default defineConfig({
       "@": path.resolve(process.cwd(), "./src"),
     },
   },
+  base: process.env.NODE_ENV === 'production' ? '/price-down/' : '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
 })
