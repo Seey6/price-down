@@ -88,13 +88,28 @@ export function formatPercentage(rate: number): string {
  */
 export function getExchangeSuggestion(comparison: ExchangeComparison): string {
   const { valueDifference } = comparison;
+  const absDiff = Math.abs(valueDifference);
   
-  if (Math.abs(valueDifference) < 1) {
-    return '价值相当，这是一个公平的交换！';
-  } else if (valueDifference > 0) {
-    return `你的商品价值更高，多出 ${formatPrice(valueDifference)}`;
+  if (absDiff <= 30) {
+    return '价值相当，这是一个公平的交换！可以放心进行。';
+  } else if (absDiff <= 50) {
+    if (valueDifference > 0) {
+      return `你的商品价值稍高一些，多付出 ${formatPrice(valueDifference)}，小亏一点~`;
+    } else {
+      return `对方商品价值稍高一些，多得到 ${formatPrice(absDiff)}，小赚一笔~`;
+    }
+  } else if (absDiff <= 100) {
+    if (valueDifference > 0) {
+      return `你的商品价值明显更高，多付出 ${formatPrice(valueDifference)}，亏麻了！`;
+    } else {
+      return `对方商品价值明显更高，多得到 ${formatPrice(absDiff)}，赚麻了！`;
+    }
   } else {
-    return `对方商品价值更高，多出 ${formatPrice(Math.abs(valueDifference))}`;
+    if (valueDifference > 0) {
+      return `你的商品价值高出很多，多付出 ${formatPrice(valueDifference)}，血亏！建议重新考虑。`;
+    } else {
+      return `对方商品价值高出很多，多得到 ${formatPrice(absDiff)}，血赚！建议考虑是否值得。`;
+    }
   }
 }
 

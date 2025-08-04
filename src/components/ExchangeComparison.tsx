@@ -349,15 +349,18 @@ export function ExchangeComparison({ offerItems, requestItems }: ExchangeCompari
             <motion.div
               className="text-lg font-semibold"
               style={{
-                color: Math.abs(comparison.valueDifference) < 100 ? colors.success :
-                       Math.abs(comparison.valueDifference) < 500 ? colors.warning : colors.error
+                color: Math.abs(comparison.valueDifference) <= 30 ? colors.success :
+                       Math.abs(comparison.valueDifference) <= 50 ? colors.warning :
+                       Math.abs(comparison.valueDifference) <= 100 ? colors.error : colors.error
               }}
               initial={{ scale: 1.3, y: -10 }}
               animate={{ scale: 1, y: 0 }}
               transition={{ duration: 0.5, type: "spring" }}
             >
-              {Math.abs(comparison.valueDifference) < 100 ? '非常公平' :
-               Math.abs(comparison.valueDifference) < 500 ? '基本公平' : '不太公平'}
+              {Math.abs(comparison.valueDifference) <= 30 ? '公平' :
+               Math.abs(comparison.valueDifference) <= 50 ? (comparison.valueDifference > 0 ? '小亏' : '小赚') :
+               Math.abs(comparison.valueDifference) <= 100 ? (comparison.valueDifference > 0 ? '亏麻了' : '赚麻了') :
+               (comparison.valueDifference > 0 ? '血亏' : '血赚')}
             </motion.div>
           </motion.div>
         </div>
@@ -367,14 +370,14 @@ export function ExchangeComparison({ offerItems, requestItems }: ExchangeCompari
       <motion.div
         className="rounded-lg p-4 border transition-colors duration-300"
         style={{
-          backgroundColor: Math.abs(comparison.valueDifference) < 100
+          backgroundColor: Math.abs(comparison.valueDifference) <= 30
             ? `${colors.success}10`
-            : Math.abs(comparison.valueDifference) < 500
+            : Math.abs(comparison.valueDifference) <= 50
             ? `${colors.warning}10`
             : `${colors.error}10`,
-          borderColor: Math.abs(comparison.valueDifference) < 100
+          borderColor: Math.abs(comparison.valueDifference) <= 30
             ? `${colors.success}40`
-            : Math.abs(comparison.valueDifference) < 500
+            : Math.abs(comparison.valueDifference) <= 50
             ? `${colors.warning}40`
             : `${colors.error}40`
         }}
@@ -395,9 +398,9 @@ export function ExchangeComparison({ offerItems, requestItems }: ExchangeCompari
         <motion.p
           className="transition-colors duration-300"
           style={{
-            color: Math.abs(comparison.valueDifference) < 100
+            color: Math.abs(comparison.valueDifference) <= 30
               ? colors.success
-              : Math.abs(comparison.valueDifference) < 500
+              : Math.abs(comparison.valueDifference) <= 50
               ? colors.warning
               : colors.error
           }}
